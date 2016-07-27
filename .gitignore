@@ -1,0 +1,16 @@
+*~
+*.swp
+*.pyc
+*orig
+.hg
+.hgignore*
+*zedstate*
+*.sqlite
+*~lock*
+nohup.out
+Log~
+log*
+.logs
+gitnore
+temp.py
+backup*
