@@ -42,7 +42,7 @@ class Config:
         os.path.abspath(os.path.dirname(__file__)), '.logs')
     LOG_FILENAME = 'app_log.log'
     LOG_FORMAT_STR = \
-        '\n%(asctime)s - %(name)s - %(levelname)6s: %(message)s'
+        '\n%(asctime)s - %(name)s - %(levelname)-8s: %(message)s'
     
     # Log file rotation scheduling
     
@@ -58,7 +58,7 @@ class Config:
 class DevConfig(Config):
 
     DEBUG = False
-    LOG_LEVEL = 'INFO'
+    LOG_LEVEL = 'DEBUG'
     TOKEN = os.getenv('SLACKSHELLBOT_TOKEN_DEV', None)
     BOT_NAME = 'slack-shell'
     TEST_CHANNEL = '#bot-test'
