@@ -16,8 +16,10 @@ def create_bot(config):
 def run_bot(bot):
     """Connect bot to server."""
     LOGGER.debug('Running SlackShellBot instance...')
-    bot.connect_rtm()
-    bot.listen()
+    if bot.connect_rtm():
+        bot.listen()
+    else:
+        LOGGER.warn('check internet connection and retry')
     
 
 def validate_token(token):

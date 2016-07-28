@@ -4,6 +4,7 @@
 
 # third-party library imports
 from slackclient import SlackClient
+import time
 
 # local imports
 from .parser import Parser
@@ -44,8 +45,12 @@ class SlackShellBot(SlackClient):
         LOGGER.debug('SlackShellBot connecting to RTM API...')
         if self.rtm_connect():
             LOGGER.info('SlackShellBot connected!')
+            rtn = True
         else:
             LOGGER.warn('SlackShellBot failed to connect!')
+            rtn = False
+            
+        return rtn
 
     # Begin listening for JSON formatted RTM API messages/events
     def listen(self):
@@ -54,3 +59,4 @@ class SlackShellBot(SlackClient):
             for event in self.rtm_read():
                 # do something with RTM API event
                 LOGGER.debug('EVENT: %s', event)
+                time.sleep(self.config.READ_WEBSOCKET_DELAY ) # one webhook message per seconds allowed

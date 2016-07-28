@@ -35,6 +35,7 @@ class Config:
                         Source: {source_url}
                         """.format(source_url=SOURCE_URL)
                         )
+    READ_WEBSOCKET_DELAY = 1
 
     # Log configuration
     LOG_DIR = os.path.join(
@@ -52,10 +53,12 @@ class Config:
     LOG_BACKUP_COUNT = 10  # Don't set to less than 1
 
 
+
 # Configuration used during development
 class DevConfig(Config):
 
-    DEBUG = True
+    DEBUG = False
+    LOG_LEVEL = 'INFO'
     TOKEN = os.getenv('SLACKSHELLBOT_TOKEN_DEV', None)
     BOT_NAME = 'slack-shell'
     TEST_CHANNEL = '#bot-test'
@@ -68,6 +71,7 @@ class DevConfig(Config):
 class TestConfig(Config):
 
     TESTING = True
+    LOG_LEVEL = 'DEBUG'
     TOKEN = os.getenv('SLACKSHELLBOT_TOKEN_TEST', None)
     BOT_NAME = 'slack-shell'
     TEST_CHANNEL = '#bot-test'
@@ -80,6 +84,7 @@ class TestConfig(Config):
 class DeployConfig(Config):
 
     DEPLOY = True
+    LOG_LEVEL = 'INFO'
     TOKEN = os.getenv('SLACKSHELLBOT_TOKEN', None)
     BOT_NAME = 'votebot'  # The nick of the bot.
   
