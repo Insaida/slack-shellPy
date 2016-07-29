@@ -12,7 +12,7 @@
 import os
 import textwrap
 
-# Template string for building string 
+# Template string for building string
 # representations for config classes
 running_mode = 'App running in {mode} mode. With configs:\n{configs}'
 
@@ -26,7 +26,7 @@ class Config:
         'insaida': 'U0NA6G39N',
         'acetakwas': 'U0NAKE0TT'
     }
-    
+
     SOURCE_URL = 'https://github.com/pyung/slack-shell'
     ABOUT = textwrap.dedent(
                         """
@@ -43,9 +43,9 @@ class Config:
     LOG_FILENAME = 'app_log.log'
     LOG_FORMAT_STR = \
         '\n%(asctime)s - %(name)s - %(levelname)-8s: %(message)s'
-    
+
     # Log file rotation scheduling
-    
+
     # Valid values for rotation time:
     #     'S','M','H','D','W0'-'W6','midnight'
     LOG_ROTATION_TIME = 'midnight'
@@ -53,12 +53,13 @@ class Config:
     LOG_BACKUP_COUNT = 10  # Don't set to less than 1
 
 
-
 # Configuration used during development
 class DevConfig(Config):
 
     DEBUG = False
     LOG_LEVEL = 'DEBUG'
+    FILE_LOG_LEVEL = 'DEBUG'
+    CONSOLE_LOG_LEVEL = 'DEBUG'
     TOKEN = os.getenv('SLACKSHELLBOT_TOKEN_DEV', None)
     BOT_NAME = 'slack-shell'
     TEST_CHANNEL = '#bot-test'
@@ -72,6 +73,8 @@ class TestConfig(Config):
 
     TESTING = True
     LOG_LEVEL = 'DEBUG'
+    FILE_LOG_LEVEL = 'DEBUG'
+    CONSOLE_LOG_LEVEL = 'DEBUG'
     TOKEN = os.getenv('SLACKSHELLBOT_TOKEN_TEST', None)
     BOT_NAME = 'slack-shell'
     TEST_CHANNEL = '#bot-test'
@@ -85,9 +88,11 @@ class DeployConfig(Config):
 
     DEPLOY = True
     LOG_LEVEL = 'INFO'
+    FILE_LOG_LEVEL = 'INFO'
+    CONSOLE_LOG_LEVEL = 'INFO'
     TOKEN = os.getenv('SLACKSHELLBOT_TOKEN', None)
     BOT_NAME = 'votebot'  # The nick of the bot.
-  
+
     def __repr__(self):
         return running_mode.format(mode='deploy')
 

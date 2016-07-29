@@ -32,13 +32,13 @@ def setup_logger(config):
         when=when,
         interval=interval,
         backupCount=backupCount)
-    file_handler.setLevel(config.LOG_LEVEL)
+    file_handler.setLevel(config.FILE_LOG_LEVEL)
     file_handler.setFormatter(formatter)
-    
+
     console_handler = logging.StreamHandler(sys.stdout)
-    console_handler.setLevel(config.LOG_LEVEL)
+    console_handler.setLevel(config.CONSOLE_LOG_LEVEL)
     console_handler.setFormatter(formatter)
-    
+
     LOGGER.addHandler(file_handler)
     LOGGER.addHandler(console_handler)
     LOGGER.setLevel(config.LOG_LEVEL)
